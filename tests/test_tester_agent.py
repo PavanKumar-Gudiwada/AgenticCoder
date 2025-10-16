@@ -13,6 +13,6 @@ from agents.tester_agent import TesterAgent
 if __name__ == "__main__":
     tester = TesterAgent()
     output = tester.run_tests()
-    print("Stdout: ", output)
+    # print("Stdout: ", output)
     analysis = tester.analyze_results(output)
     print(analysis)
