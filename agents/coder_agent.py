@@ -30,10 +30,15 @@ class CoderAgent:
         # Explicitly instructs the model to output structured JSON
         self.prompt = PromptTemplate(
             template=(
-                "You are a senior Python developer collaborating with a planning agent.\n"
-                "You are given a project plan that lists modules and detailed coding tasks.\n\n"
-                "For each module, generate the corresponding Python file that fully implements the described behavior.\n"
-                "Only output JSON in this format:\n"
+                "You are a senior Python developer.\n"
+                "Given a project plan with modules and tasks, generate full Python files.\n\n"
+                "Rules:\n"
+                "- Code files go in workspace root.\n"
+                "- Test files go in /tests/.\n"
+                "- Tests import code from workspace root (e.g. `from module import func`).\n"
+                "- Avoid relative imports like `..`; if needed, add:\n"
+                "  import sys, os; sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))\n\n"
+                "Output valid JSON only:\n"
                 '{{"files": [{{"filename": "file1.py", "code": "<python code>"}}, ...]}}\n\n'
                 "Plan:\n{modules}\n\n"
                 "{format_instructions}"
