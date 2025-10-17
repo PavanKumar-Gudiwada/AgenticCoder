@@ -34,7 +34,7 @@ def run_pipeline(user_prompt: str):
 
     # Step 2 — Code Generation
     print("\n💻 Generating code files...")
-    code_output = coder.generate_code(plan)
+    code_output = coder.generate_or_improve_code(plan)
 
     if "error" in code_output:
         print("❌ Code generation failed:", code_output["exception"])

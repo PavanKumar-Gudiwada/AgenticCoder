@@ -15,4 +15,4 @@ if __name__ == "__main__":
     output = tester.run_tests()
     # print("Stdout: ", output)
     analysis = tester.analyze_results(output)
-    print(analysis)
+    print("analysis: ", analysis)

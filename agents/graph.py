@@ -90,19 +90,26 @@ def test_node(state: GraphState) -> GraphState:
 def decide_next(state: GraphState) -> str:
     iteration = state.get("iteration", 0)
     max_iterations = 3
+    feedback_lower = state.get("feedback", "").lower()
 
-    if "passed" in state.get("feedback", "").lower():
-        print("\n✅ [Graph] Tests passed. Ending pipeline.")
-        return END
-
+    # 1. Check for max retries first, as this is a hard stop limit.
     if iteration >= max_iterations:
         print(f"⚠️ [Graph] Max retries ({max_iterations}) reached. Ending pipeline.")
         return END
 
+    # 2. Check for the explicit success marker (e.g., '✅ All tests passed!').
+    # This avoids false positives from summaries like '1 failed, 9 passed'.
+    if "✅" in feedback_lower:
+        print("\n✅ [Graph] Tests passed. Ending pipeline.")
+        return END
+
+    # 3. If not successful and not at max iterations, retry.
     state["iteration"] = iteration + 1
-    # CRITICAL FIX: Send flow back to 'code' to allow for improvements based on feedback
+
+    # CRITICAL FIX: The print statement now correctly reflects the loop skipping the planner.
+    # Note: We are keeping the flow to 'code' as you requested for a quick bugfix loop.
     print(
-        f"\n🔁 [Graph] Retry {state['iteration']}/{max_iterations}: → coder → tester loop."
+        f"\n🔁 [Graph] Retry {state['iteration']}/{max_iterations}: Re-running code → test loop."
     )
     return "code"
 
