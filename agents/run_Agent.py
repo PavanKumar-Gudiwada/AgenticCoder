@@ -18,8 +18,10 @@ def run_agentic_pipeline(prompt: str):
 
     print("\n🚀 Starting LangGraph Agentic Coding Pair\n")
     # Run the graph
-    graph.invoke(state)
+    final_state = graph.invoke(state)
     print("\n🏁 Agent completed!")
+
+    return final_state
 
 
 if __name__ == "__main__":
