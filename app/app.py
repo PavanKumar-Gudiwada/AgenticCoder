@@ -1,6 +1,10 @@
 import gradio as gr
 import shutil
 import os
+from app_helper import (
+    delete_workspace,
+    make_workspace,
+)
 
 project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
 os.sys.path.append(project_root)
@@ -12,6 +16,9 @@ from agents.run_Agent import run_agentic_pipeline
 
 
 def run_project(prompt):
+    directory = "workspace"
+    make_workspace(directory)
+
     # 1. Run the pipeline and get the final state
     final_state = run_agentic_pipeline(prompt)
 
@@ -25,11 +32,9 @@ def run_project(prompt):
     zip_filename = "workspace_output"
     zip_path = f"{zip_filename}.zip"
 
-    # Ensure the workspace exists before zipping
-    if not os.path.isdir("workspace"):
-        os.makedirs("workspace", exist_ok=True)
+    shutil.make_archive(zip_filename, "zip", directory)
 
-    shutil.make_archive(zip_filename, "zip", "workspace")
+    delete_workspace(directory)
 
     # 4. Return the three expected outputs
     return plan_output, progress_results, zip_path
