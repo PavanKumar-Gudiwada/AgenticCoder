@@ -11,7 +11,7 @@ hf_oauth: true
 hf_oauth_scopes:
 - inference-api
 license: mit
-short_description: Agentic pipeline to write code and tests for a generic problem statement.
+short_description: Coder Agent for a generic problem statement.
 fullWidth: true
 models:
     - openai/gpt-5-mini
