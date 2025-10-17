@@ -78,6 +78,8 @@ def test_node(state: GraphState) -> GraphState:
     # NOTE: The test execution here is simple; in a real scenario, the code_output would be executed.
     output = tester.run_tests()  # Pass code to tester
     feedback = tester.analyze_results(output)
+    # Increment iteration *inside a node that returns state for it to persist*
+    state["iteration"] = state.get("iteration", 0) + 1
     state["test_output"] = output
     state["feedback"] = feedback
     print("🔍 [Tester Feedback]:", feedback)
@@ -88,12 +90,11 @@ def test_node(state: GraphState) -> GraphState:
 # Decide Next Node (Loop Logic)
 # -----------------------------
 def decide_next(state: GraphState) -> str:
-    iteration = state.get("iteration", 0)
     max_iterations = 3
     feedback_lower = state.get("feedback", "").lower()
 
     # 1. Check for max retries first, as this is a hard stop limit.
-    if iteration >= max_iterations:
+    if state["iteration"] >= max_iterations:
         print(f"⚠️ [Graph] Max retries ({max_iterations}) reached. Ending pipeline.")
         return END
 
@@ -102,9 +103,6 @@ def decide_next(state: GraphState) -> str:
     if "✅" in feedback_lower:
         print("\n✅ [Graph] Tests passed. Ending pipeline.")
         return END
-
-    # 3. If not successful and not at max iterations, retry.
-    state["iteration"] = iteration + 1
 
     # CRITICAL FIX: The print statement now correctly reflects the loop skipping the planner.
     # Note: We are keeping the flow to 'code' as you requested for a quick bugfix loop.
