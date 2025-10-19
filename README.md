@@ -92,15 +92,23 @@ AgenticCoder/
 
 # ⚙️ Setup & Run
 1. Clone the repository and enter
+```bash
     git clone https://github.com/PavanKumar-Gudiwada/AgenticCoder
     cd AgenticCoder
+```
 2. Create virtual environment and activate it
+```bash
     python -m venv .venv
-    .venv\Scripts\activate on Windows
+    .venv\Scripts\activate (on Windows)
+```    
 3. Install the dependencies
+```bash
     pip install -r requirements.txt
+```
 4. Setup your .env file with API keys
+```bash
     OPENAI_API_KEY="your_api_key_here"
+```
 5. Run the app.py file
 
 # 🔒 Responsible Use
