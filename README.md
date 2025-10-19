@@ -43,6 +43,7 @@ The entire process is orchestrated using agentic workflows, with each agent spec
 Built with modular design principles, it can be extended for custom tools, APIs, or deployment setups.
 
 # 🧩 Architecture 
+![Alt text](images/pipeline.png)
 
 # 🛠️ Tech Stack
 - Python 3.10+
