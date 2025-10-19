@@ -87,6 +87,7 @@ AgenticCoder/
 ├── main.py                      # Main entry point for local execution
 ├── README.md                    # Project documentation
 └── requirements.txt             # Python dependencies
+```
 
 # ⚙️ Setup & Run
 1. Clone the repository and enter
