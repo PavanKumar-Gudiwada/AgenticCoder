@@ -78,6 +78,16 @@ with gr.Blocks(title="Autonomous Coding Agent") as demo:
                 # Output 3: Download File
                 file_output = gr.File(label="Download Generated Code (.zip)", scale=1)
 
+    gr.Markdown(
+        """
+    <small>⚠️ <b>Data Safety Disclaimer:</b><br>
+    Do <b>not</b> enter any confidential, personal, or proprietary information in prompts.<br>
+    By using this app, you acknowledge that <b>both your inputs and outputs are shared with OpenAI for processing</b>.<br>
+    You are responsible for ensuring no sensitive data is included.
+    </small>
+    """
+    )
+
     # ----------------------------------------------------
     # Define Actions
     # ----------------------------------------------------
