@@ -60,25 +60,37 @@ Built with modular design principles, it can be extended for custom tools, APIs,
 ✅ Final project packaged as a downloadable .zip
 
 # Project Structure
-
+```bash
 AgenticCoder/
 │
-├── main.py                # Entry point
-├── agents/
-│   ├── planner.py
-│   ├── coder.py
-│   ├── tester.py
-│   └── evaluator.py
+├── .github/                     # GitHub workflows
 │
-├── workspace/             # Generated code and tests
-├── tools/                 # Custom tools and utilities
-├── requirements.txt
-├── README.md
-└── LICENSE
+├── agenticCoder_tests/          # Unit and integration tests
+│
+├── agents/                      # Core AI agent modules
+│   ├── coder_agent.py           # Code generation agent
+│   ├── graph.py                 # Defines agent graph / state transitions
+│   ├── planner_agent.py         # Planning agent
+│   ├── run_Agent.py             # Orchestrator / entry for agent execution
+│   └── tester_agent.py          # Testing agent
+│
+├── app/                         # Frontend or deployment layer
+│   ├── app_helper.py            # Helper functions for app logic
+│   └── app.py                   # Main app entry (Gradio / Hugging Face)
+│
+├── llm/                         # LLM-related modules
+│   └── llmModels.py             # Model loading and configuration
+│
+├── .env                         # Environment variables (API keys, configs)
+├── .gitignore                   # Git ignore rules
+├── LICENSE                      # License information
+├── main.py                      # Main entry point for local execution
+├── README.md                    # Project documentation
+└── requirements.txt             # Python dependencies
 
 # ⚙️ Setup & Run
 1. Clone the repository and enter
-    git clone https://github.com/<your-username>/AgenticCoder.git
+    git clone https://github.com/PavanKumar-Gudiwada/AgenticCoder
     cd AgenticCoder
 2. Create virtual environment and activate it
     python -m venv .venv
@@ -102,10 +114,10 @@ Containing:
 - Test files
 
 # 🤖 Future Enhancements
- Add memory for long-term project context
- Integrate evaluation metrics (coverage, quality score)
- Add CI/CD pipeline for automatic testing
- Expand language support beyond Python
+- Add memory for long-term project context
+- Integrate evaluation metrics (coverage, quality score)
+- Add CI/CD pipeline for automatic testing
+- Expand language support beyond Python
 
  # 🧑‍💻 Author
 [Pavan Kumar Gudiwada]
