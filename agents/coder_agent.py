@@ -5,6 +5,11 @@ from langchain.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
 import os
 
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+os.sys.path.append(project_root)
+
+from llm.llmModels import get_llm
+
 
 class CodeFile(BaseModel):
     filename: str = Field(
@@ -25,7 +30,7 @@ class CoderAgent:
         os.makedirs(output_dir, exist_ok=True)
 
         # Initialize LLM and Parser (kept in __init__ for reuse)
-        self.llm = ChatOpenAI(model="gpt-5-mini", temperature=0.2)
+        self.llm = get_llm(model_name="gpt-5-mini", temperature=0.2)
         self.parser = JsonOutputParser(pydantic_object=CodeBundle)
 
         # Explicitly instructs the model to output structured JSON

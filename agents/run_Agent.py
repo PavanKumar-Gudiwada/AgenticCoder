@@ -22,8 +22,3 @@ def run_agentic_pipeline(prompt: str):
     print("\n🏁 Agent completed!")
 
     return final_state
-
-
-if __name__ == "__main__":
-    user_prompt = input("Describe your coding project idea: ").strip()
-    run_agentic_pipeline(user_prompt)

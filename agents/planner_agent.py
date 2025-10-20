@@ -1,8 +1,14 @@
+import os
 from typing import List
 from langchain_openai import ChatOpenAI
 from langchain.prompts import PromptTemplate
 from langchain_core.output_parsers import JsonOutputParser
 from pydantic import BaseModel, Field
+
+project_root = os.path.abspath(os.path.join(os.path.dirname(__file__), ".."))
+os.sys.path.append(project_root)
+
+from llm.llmModels import get_llm
 
 
 # --- Step 1: Define schema using Pydantic ---
@@ -23,9 +29,7 @@ class ProjectPlan(BaseModel):
 class PlannerAgent:
     def __init__(self):
         # Use the new ChatOpenAI from langchain_openai
-        self.llm = ChatOpenAI(
-            model="gpt-5-mini"
-        )  # no temperature param to avoid unsupported errors
+        self.llm = get_llm(model_name="gpt-5-mini", temperature=0.2)
 
         # Structured output parser
         self.parser = JsonOutputParser(pydantic_object=ProjectPlan)
