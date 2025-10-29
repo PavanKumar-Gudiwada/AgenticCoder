@@ -16,7 +16,7 @@ def get_llm(model_name=None, temperature=0):
         return ChatOpenAI(
             model_name=model_name or os.getenv("OPENAI_MODEL", "gpt-5-mini"),
             temperature=temperature,
-            timeout=60,
+            timeout=300,
             api_key=os.getenv("OPENAI_API_KEY"),
         )
 
